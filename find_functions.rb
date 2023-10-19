@@ -1,11 +1,4 @@
-# Open the file
-# Decide whether to read the whole file or line by line.... maybe convert each file to an array of lines?
-# I don't want to rebuild the wheel on this so I might as well have it parse every line and then figure out how to use the stuff I want and ignore the rest... so not just quest xp... but also faction and anything else that might be useful...
-#separate each function into an array
-
-file = File.open("./Beno_Targnarle.lua")
-lines = file.readlines
-file.close
+# This function takes in the lines of a file and returns an array with the beginning and end line numbers (by index of the array!) for each function.
 
 def find_functions(lines)
   function_lines = []
@@ -34,6 +27,3 @@ def find_functions(lines)
   end
   return function_lines
 end
-
-pp find_functions(lines)
-
