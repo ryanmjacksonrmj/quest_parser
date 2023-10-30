@@ -1,7 +1,7 @@
 # This function takes in the lines of a file and returns an array with the beginning and end line numbers (by index of the array!) for each function.
 
-def find_functions(lines)
-  function_lines = []
+def find_sections(lines)
+  section_bounds = []
   index = 0
   expecting_ends = 0
   within_function = false
@@ -16,7 +16,7 @@ def find_functions(lines)
       if within_function == true && expecting_ends == 1
         function_end = index
         function_bounds = [function_start, function_end]
-        function_lines << function_bounds
+        section_bounds << function_bounds
         within_function = false
         expecting_ends = 0
       else
@@ -25,5 +25,5 @@ def find_functions(lines)
     end
     index += 1
   end
-  return function_lines
+  return section_bounds
 end

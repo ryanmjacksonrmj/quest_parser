@@ -1,21 +1,16 @@
 # Open the file
-# Decide whether to read the whole file or line by line.... maybe convert each file to an array of lines?
-# I don't want to rebuild the wheel on this so I might as well have it parse every line and then figure out how to use the stuff I want and ignore the rest... so not just quest xp... but also faction and anything else that might be useful...
-#separate each function into an array
+# Stores each line of the file into an array called lines
+# Use the find_sections method to return a two dimensional array. Each inner array returns the index of the start line and end line of a function within the designated file. This is then stored in section_bounds.
 
-#am I eventually going to want each of the functions to be a class with .faction and .rewards properties? hmmm maybe but I'm not sure I want things grouped that way... I want to be able to call all the quests that hit a certain faction for example.. so maybe faction needs to be its own class?
 
-#As I think about it more I think quests are there own class and faction is its own class
-
-#Faction with each faction as an instantiated object. Has properties of id #, quests that impact it and by how much, mobs that impact it, and by how much
-
-#Quests is class with each quest... one QuestReward per quest... that's how to delineate quest? Some way to link related quests maybe?
-
-require "./find_functions.rb"
-require "./parse_function.rb"
+require "./find_sections.rb"
+require "./parse_each_section.rb"
+require "./cleaning_rewards.rb"
+require "./find_rewards.rb"
 
 file = File.open("./Beno_Targnarle.lua")
 lines = file.readlines
 file.close
-
-test = parse_function(lines, find_functions(lines), 1)
+section_bounds = find_sections(lines) #Two-dimensional array. Paired values which represent the beginning and ending index of chunks of code in lines.
+contains_rewards = find_rewards(lines, section_bounds)
+pp cleaning_rewards(contains_rewards)
