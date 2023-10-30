@@ -13,4 +13,6 @@ lines = file.readlines
 file.close
 section_bounds = find_sections(lines) #Two-dimensional array. Paired values which represent the beginning and ending index of chunks of code in lines.
 contains_rewards = find_rewards(lines, section_bounds)
-pp cleaning_rewards(contains_rewards)
+rewards = cleaning_rewards(contains_rewards)
+system("clear")
+puts "The reward for quest 1 is #{rewards[0][0]} platinum, #{rewards[0][1]} gold, #{rewards[0][2]} silver, #{rewards[0][3]} copper, Items: #{rewards[0][4]}, and #{rewards[0][5]} points xp."
